@@ -14,7 +14,7 @@ There are a lot of "bonuses" included in the specifications in this project. We 
 
 ## Getting Started
 
-- Create **one** fork of this repository for your entire group, titled project2-[group_number]
+- Create **one** fork of this repository for your entire group, titled project2-[groupName]
 - Set the owner of the repository to the BoG organization
 - Each group member should clone the repository locally, and run `npm install` in the project folder
 - You should generate a Next.js app using create-next-app as mentioned in class https://nextjs.org/docs/app/api-reference/cli/create-next-app
