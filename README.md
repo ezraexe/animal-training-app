@@ -9,7 +9,7 @@ There are a lot of "bonuses" included in the specifications in this project. We 
 ## Submission
 
 - Demo your presentation and do code reviews during class on 4/1/2025
-- Present your final project during class on TBD
+- Present your final project during class on 4/3/2025
 - **Due: 4/1/2025**
 
 ## Getting Started
