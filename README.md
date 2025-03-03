@@ -84,12 +84,16 @@ We will be incorporating all we have learned thus far such as CSS, components, h
 
 - You will create three pages to display all users, training logs, and animals in the database regardless of the user along with the sidebar and (bonus) search bar components. Refer to the Figma for what they should look like.
 
-### (Bonus) Search Bar Component
+### Search Bar Component
 
 <img width="600" alt="Screenshot 2023-11-09 at 5 49 13 PM" src="https://github.com/BoG-Dev-Bootcamp-F23/project2-f23/assets/8647920/ac885c28-fcba-4806-933b-eb324877d438">
 
 - This component is a simple search bar that either filters components when you click an enter button next to the search or as you type without using a button.
 - For animal/user pages the search limits by the name of the animal/user and for training log pages the search limits by the title of the training log.
+
+### Bonuses
+- Implement React Context, Redux, or Zustand for state management.
+- Implement a socket for real-time updates. 
 
 ## Backend Specifications
 
@@ -107,14 +111,14 @@ We will be incorporating all we have learned thus far such as CSS, components, h
     - **Status 200 (Success):** If the body contains all of the information and is able to create the user/animal/training log
     - **Status 400:** If the body contains incorrect information
     - **Status 500:** For any other errors that occur
-- (Bonus) In the `POST /api/training` endpoint, we want to add a check to ensure that the animal specified in the training log belongs to the user specified in the training log. Add in code to do this.
+- In the `POST /api/training` endpoint, we want to add a check to ensure that the animal specified in the training log belongs to the user specified in the training log. Add in code to do this.
   - Response:
     - **Status 400:** If the training log animal is not owned by specified user
 
 ### Update Operations
 
 - Create a PATCH endpoint at `/api/animal` to update the `hoursTrained` of an animal whenever a new training log is made or updated
-- (Bonus) Create a PATCH endpoint at `/api/training` to edit the info of a training log.
+- Create a PATCH endpoint at `/api/training` to edit the info of a training log.
 - Note these requests will have a similar request body and response statuses:
   - Body: A JSON containing the animal/training log id for the animal/training log we want to edit along with the information we want to update
   - Response:
@@ -131,7 +135,7 @@ We will be incorporating all we have learned thus far such as CSS, components, h
   - Response:
     - **Status 200 (Success):** If we are able to retrieve the users/animals/training logs
     - **Status 500**: For any other errors
-  - (Bonus) These three endpoints can implement pagination -- ideally using the document IDs or some other property that has natural ordering (i.e. take a look at approach 2 in this [article](https://www.codementor.io/@arpitbhayani/fast-and-efficient-pagination-in-mongodb-9095flbqr))
+  - These three endpoints can implement pagination -- ideally using the document IDs or some other property that has natural ordering (i.e. take a look at approach 2 in this [article](https://www.codementor.io/@arpitbhayani/fast-and-efficient-pagination-in-mongodb-9095flbqr))
 
 ### Verify User
 
@@ -140,7 +144,7 @@ We will be incorporating all we have learned thus far such as CSS, components, h
     - **Status 200 (Success):** If the user info is valid
     - **Status 500**: If the user info is not valid
 
-### (Bonus) Delete Operations
+### Delete Operations
 
 - Incorporate a way to delete users, animals, and training logs (which would cause animal `hoursTrained` to be decremented) and follow similar response formats as before for error handling.
 
