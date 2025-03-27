@@ -14,17 +14,17 @@ export default function LoginPage() {
                 />  
             </div>
 
-            {/* login title */}
+            {/* Login title */}
             <div className="max-w-xl w-full pb-10 relative">
-                <h2 className="text-center font-heebo text-[64px] font-bold leading-none text-gray-900 w-[161px] h-[94px] mx-auto">
+                <h2 className="text-center font-heebo text-[4rem] font-bold leading-none text-gray-900 w-[30rem] h-[6rem] mx-auto">
                     Login
                 </h2>
 
                 {/* login form */}
                 <form className="mt-8">
                     <div className="space-y-4">
-                        <input type="email" placeholder="Email" className="w-full px-1 py-1 border-b-[2.5px] border-[#D21312] placeholder-black focus:outline-none" />
-                        <input type="password" placeholder="Password" className="w-full px-1 py-1 border-b-[2.5px] border-[#D21312] placeholder-black focus:outline-none" />
+                        <input type="email" placeholder="Email" className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none" />
+                        <input type="password" placeholder="Password" className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none" />
                     </div>
                 </form>
                 {/* login button */}
@@ -39,28 +39,14 @@ export default function LoginPage() {
                 <p className="mt-8 text-center text-black "> 
                     Don't Have an Account? {' '} <Link href="/signup" className="text-black font-bold">Sign Up</Link>
                 </p>
-
-                {/* details and credentials */}
-                <p className="absolute bottom-[-350px] w-full text-black text-center font-heebo text-[12px]"> 
-                    Made with ♡ by Long Lam 
-                    <br />
-                    © 2023 BOG Developer Bootcamp. All rights reserved.
-                </p>
             </div>
-
-
-
-
-
-
-    
-
-
-
-
-
             
+            {/* details */}
+            <p className="absolute bottom-8 text-black text-center font-heebo text-[12px] w-full max-w-xl"> 
+                Made with ♡ by Long Lam 
+                <br />
+                © 2023 BOG Developer Bootcamp. All rights reserved.
+            </p>
         </div>
-
     );
 }
