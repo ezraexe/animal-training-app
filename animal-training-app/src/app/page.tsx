@@ -1,3 +1,5 @@
+// Ezra : the landing page - we can just redirect to the login page later 
+// I'll make sure to work on that 
 import Image from "next/image";
 
 export default function Home() {
