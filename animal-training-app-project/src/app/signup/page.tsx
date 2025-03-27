@@ -24,7 +24,7 @@ export default function LoginPage() {
                 <form className="mt-8">
                     <div className="space-y-4">
                         <input type="text" placeholder="Full Name" className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none" />
-                        <input type="text" placeholder="Email" className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none" />
+                        <input type="email" placeholder="Email" className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none" />
                         <input type="password" placeholder="Password" className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none" />
                         <input type="password" placeholder="Confirm Password" className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none" />
                     </div>
