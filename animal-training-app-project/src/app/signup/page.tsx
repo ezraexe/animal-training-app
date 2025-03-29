@@ -16,9 +16,12 @@ export default function SignupPage() {
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("Form submitted");
+
     setError("");
 
     if (!name) {
+      console.log("Name validation failed");
       setError("Please enter your name");
       return;
     }
@@ -34,11 +37,13 @@ export default function SignupPage() {
     }
 
     if (password != confirmPassword) {
+      console.log("Password match failed");
       setError("Passwords do not match");
       return;
     }
 
     try {
+      console.log("Sending request to API");
       const response = await fetch("/api/user", {
         // api/user is route for signup
         method: "POST",
@@ -77,6 +82,13 @@ export default function SignupPage() {
         <h2 className="text-center font-heebo text-[4rem] font-bold leading-none text-gray-900 w-[30rem] h-[6rem] mx-auto">
           Create Account
         </h2>
+
+        {/* Error message display */}
+        {error && (
+          <div className="text-[#D21312] bg-red-50 border border-[#D21312] p-3 rounded text-center mb-4" role="alert">
+            {error}
+          </div>
+        )}
 
         {/* login form */}
         <form className="mt-8" onSubmit={handleSignup}>
@@ -127,14 +139,14 @@ export default function SignupPage() {
               Admin access
             </label>
           </div>
+          {/* login button */}
+          <button
+            type="submit"
+            className="w-full py-3 bg-[#D21312] rounded-2xl text-white text-2xl font-semibold focus:outline-none mt-14 cursor-pointer"
+          >
+            Sign Up
+          </button>
         </form>
-        {/* login button */}
-        <button
-          type="submit"
-          className="w-full py-3 bg-[#D21312] rounded-2xl text-white text-2xl font-semibold focus:outline-none mt-14 cursor-pointer"
-        >
-          Sign Up
-        </button>
 
         {/* sign up link */}
         <p className="mt-8 text-center text-black ">
