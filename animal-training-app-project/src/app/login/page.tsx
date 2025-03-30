@@ -2,8 +2,42 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useUser } from "@/context/UserContext";
+import { isValidEmail, isValidPassword } from "@/lib/credentialAuth";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const { login } = useUser();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+
+    if (!isValidEmail(email)) {
+      setError("Invalid email address");
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      setError("Invalid password");
+      return;
+    }
+
+    try {
+      await login(email, password); // will throw an error if login fails, otherwise it will push to the dashboard page
+      router.push("/dashboard");
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Error occurred while logging in");
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-white -mt-[6.375rem]">
       {/* screen and red circle */}
@@ -18,20 +52,33 @@ export default function LoginPage() {
         </h2>
 
         {/* login form */}
-        <form className="mt-8">
+        <form className="mt-8" onSubmit={handleSubmit}>
+          {/* Error message display */}
+          {error && (
+            <div
+              className="text-[#D21312] bg-red-50 border border-[#D21312] p-3 rounded text-center mb-4"
+              role="alert"
+            >
+              {error}
+            </div>
+          )}
           <div className="space-y-4">
             <input
               type="email"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none"
             />
             <input
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none"
             />
           </div>
-          
+
           {/* login button */}
           <button
             type="submit"
