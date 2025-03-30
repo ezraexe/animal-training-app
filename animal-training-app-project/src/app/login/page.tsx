@@ -14,7 +14,7 @@ export default function LoginPage() {
       {/* Login title */}
       <div className="max-w-xl w-full pb-10 relative">
         <h2 className="text-center font-heebo text-[4rem] font-bold leading-none text-gray-900 w-[30rem] h-[6rem] mx-auto">
-            Login
+          Login
         </h2>
 
         {/* login form */}
@@ -31,14 +31,16 @@ export default function LoginPage() {
               className="w-full px-1 py-1 border-b-[.156rem] border-[#D21312] placeholder-black focus:outline-none"
             />
           </div>
-        </form>
-        {/* login button */}
-        <button
-          type="submit"
-          className="w-full py-3 bg-[#D21312] rounded-2xl text-white text-2xl font-semibold focus:outline-none mt-14 cursor-pointer"
-        >
+          
+          {/* login button */}
+          <button
+            type="submit"
+            className="w-full py-3 bg-[#D21312] rounded-2xl text-white text-2xl font-semibold focus:outline-none mt-14 cursor-pointer"
+          >
             Log In
-        </button>
+          </button>
+        </form>
+
         {/* sign up link */}
         <p className="mt-8 text-center text-black ">
           Don't Have an Account?{" "}
