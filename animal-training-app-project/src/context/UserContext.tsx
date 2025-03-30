@@ -38,7 +38,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       setUser(data); 
 
       localStorage.setItem('user', JSON.stringify(data)); 
-      
+
     } catch (error) {
       throw new Error('Failed to login'); 
     }
@@ -46,7 +46,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = async () => {
     setUser(null);
-    localStorage.removeItem('user');;
+    localStorage.removeItem('user');
   };
 
   return (
