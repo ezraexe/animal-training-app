@@ -31,11 +31,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         }, 
         body: JSON.stringify({ email, password }), 
       });
+      const data = await response.json(); 
       if (!response.ok) {
         throw new Error('Failed to login'); 
       }
-      const data = await response.json(); 
       setUser(data); 
+
+      localStorage.setItem('user', JSON.stringify(data)); 
       
     } catch (error) {
       throw new Error('Failed to login'); 
