@@ -39,3 +39,14 @@ const animalSchema = new mongoose.Schema({
 });
 
 export const Animal = mongoose.models.Animal || mongoose.model('Animal', animalSchema);
+
+export interface AnimalWithId {
+  _id: string;
+  name: string;
+  breed: string;
+  owner: {
+    ownerId: string;
+  };
+  hoursTrained: number;
+  profilePicture: string;
+}

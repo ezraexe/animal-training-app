@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { UserProvider } from '@/context/UserContext';
+import Navbar from '@/components/Navbar';
 // import navbar later and add it into the main component
 
 
 export const metadata: Metadata = {
   title: "Animal Training App",
-  description: "BOG Project 2",
+  description: "BOG Final Project",
 };
 
 export default function RootLayout({
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-
+        <Navbar />
           <UserProvider>
             <main>
               {children}
