@@ -38,4 +38,60 @@ export async function GET(request : NextRequest) {
       { status: 500}
     )
   }
+
+}
+
+export async function POST(request: NextRequest) { 
+  try {
+    const userId = request.headers.get('user-id'); 
+
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: 'User ID is required'}, 
+        { status: 400}
+      )
+    }
+
+    const body = await request.json(); 
+
+    const requiredFields = ['name', 'breed', 'owner'];
+    for (const field of requiredFields) {
+      if (!body[field]) {
+        return NextResponse.json(
+          { success: false, error: `${field} is required`}, 
+          { status: 400}
+        );
+      }
+    }
+
+    
+    await connectDB(); 
+
+    const animal = await Animal.create({
+      name: body.name, 
+      breed: body.breed, 
+      owner: userId, 
+      hoursTrained: body.hoursTrained || 0, 
+      profilePicture: body.profilePicture || '', 
+    })
+
+    const populatedAnimal = await Animal.findById(animal._id)
+    .populate({
+      path: 'owner', 
+      model: 'User', 
+      select: 'fullName -_id'
+    }); 
+
+    return NextResponse.json({success: true, data: populatedAnimal}, {status: 200}); 
+    
+
+    
+  } catch (error) { 
+    console.error('Error creating animal:', error); 
+    return NextResponse.json(
+      { success: false, error: 'Failed to create animal'}, 
+      { status: 500}
+    );
+  }
+
 }
