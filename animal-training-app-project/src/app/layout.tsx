@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { UserProvider } from '@/context/UserContext';
 import Navbar from '@/components/Navbar';
+import { Heebo } from 'next/font/google';
 // import navbar later and add it into the main component
 
+const heebo = Heebo({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-heebo',
+});
 
 export const metadata: Metadata = {
   title: "Animal Training App",
@@ -16,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html lang="en" className={heebo.variable}>
+      <body className="antialiased font-heebo">
         <Navbar />
           <UserProvider>
             <main>
