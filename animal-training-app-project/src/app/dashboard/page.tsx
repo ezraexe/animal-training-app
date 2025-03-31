@@ -3,7 +3,6 @@
 import React from 'react';
 import AnimalCard from '@/components/AnimalCard';
 import UserCard from '@/components/UserCard';
-import Navbar from '@/components/Navbar';
 import { AnimalWithId } from '@/schemas/animal.schema';
 import { publicUserData } from '@/schemas/user.schema';
 

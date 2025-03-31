@@ -22,7 +22,7 @@ export default function LoginPage() {
     }
 
     if (!isValidPassword(password)) {
-      setError("Invalid password");
+      setError("Password must be at least 6 characters");
       return;
     }
 

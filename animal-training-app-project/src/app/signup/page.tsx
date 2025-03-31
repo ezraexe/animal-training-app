@@ -32,7 +32,7 @@ export default function SignupPage() {
     }
 
     if (!isValidPassword(password)) {
-      setError("Please enter a valid password");
+      setError("Password must be at least 6 characters");
       return;
     }
 
@@ -50,7 +50,12 @@ export default function SignupPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password, admin }),
+        body: JSON.stringify({ 
+          fullName: name,
+          email, 
+          password, 
+          admin 
+        }),
       });
 
       const data = await response.json();
