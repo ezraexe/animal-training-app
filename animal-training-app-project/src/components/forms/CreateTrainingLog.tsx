@@ -60,10 +60,11 @@ export default function CreateTrainingLog({ onCancel, onSave }: CreateTrainingLo
         user: user?._id
       };
 
-      const response = await fetch('/api/training', {
+      const response = await fetch('/api/nonadmin/training', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'user-id': user?._id || ''
         },
         body: JSON.stringify(data)
       });
