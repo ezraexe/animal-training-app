@@ -45,7 +45,8 @@ export interface AnimalWithId {
   name: string;
   breed: string;
   owner: {
-    ownerId: string;
+    _id: string;
+    fullName: string;
   };
   hoursTrained: number;
   profilePicture: string;

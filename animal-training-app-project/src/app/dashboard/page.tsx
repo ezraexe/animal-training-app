@@ -15,7 +15,8 @@ export default function Dashboard() {
     hoursTrained: 50,
     profilePicture: 'https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZG9nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
     owner: {
-      ownerId: 'owner123',
+      _id: 'owner123',
+      fullName: 'John Doe',
     },
   };
 
