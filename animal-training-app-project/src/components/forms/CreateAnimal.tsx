@@ -2,7 +2,7 @@
 
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
-import Header from "../Header";
+
 interface Animal {
   _id: string;
   name: string;
@@ -15,10 +15,9 @@ interface Animal {
 interface CreateAnimalProps {
   onCancel: () => void;
   onSave: () => void;
-  hideHeader?: boolean;
 }
 
-export default function CreateAnimal({ onCancel, onSave, hideHeader = false }: CreateAnimalProps) {
+export default function CreateAnimal({ onCancel, onSave }: CreateAnimalProps) {
   const { user } = useUser();
   const router = useRouter();
 
@@ -54,7 +53,6 @@ export default function CreateAnimal({ onCancel, onSave, hideHeader = false }: C
 
   return (
     <div>
-      {!hideHeader && <Header title="Animal" />}
       <div className="p-10">
         <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
           <div>

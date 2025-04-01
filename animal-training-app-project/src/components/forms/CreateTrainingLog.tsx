@@ -3,7 +3,6 @@
 import {useState, useEffect} from "react"; 
 import { useUser } from "@/context/UserContext"; 
 import { useRouter } from "next/navigation"; 
-import Header from "../Header"; 
 
 interface Animal {
   _id: string; 
@@ -17,10 +16,9 @@ interface Animal {
 interface CreateTrainingLogProps {
   onCancel: () => void; 
   onSave: () => void;
-  hideHeader?: boolean;
 }
 
-export default function CreateTrainingLog({ onCancel, onSave, hideHeader = false }: CreateTrainingLogProps) {
+export default function CreateTrainingLog({ onCancel, onSave }: CreateTrainingLogProps) {
   const { user } = useUser(); 
   const router = useRouter(); 
 
@@ -81,7 +79,6 @@ export default function CreateTrainingLog({ onCancel, onSave, hideHeader = false
 
   return (
     <div>
-      {!hideHeader && <Header title="Training Log" />}
       <div className="p-10">
         <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
           <div>
