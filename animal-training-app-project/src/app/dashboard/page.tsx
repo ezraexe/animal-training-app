@@ -1,48 +1,100 @@
 'use client';
 
-import React from 'react';
-import AnimalCard from '@/components/AnimalCard';
-import UserCard from '@/components/UserCard';
-import { AnimalWithId } from '@/schemas/animal.schema';
-import { publicUserData } from '@/schemas/user.schema';
+import Sidebar from '../../components/Sidebar';
+import CreateAnimal from '../../components/forms/CreateAnimal';
+import CreateTrainingLog from '../../components/forms/CreateTrainingLog';
+import Navbar from '../../components/Navbar';
+import Header from '../../components/Header';
+import AdminAnimalView from '../../components/views/AnimalViewAdmin';
+import TrainingViewAdmin from '../../components/views/TrainingViewAdmin';
+import UserViewAdmin from '../../components/views/UserViewAdmin';
+import { useState } from 'react';
 
-export default function Dashboard() {
-  // Sample animal data for testing
-  const sampleAnimal: AnimalWithId = {
-    _id: '1',
-    name: 'Buddy',
-    breed: 'Golden Retriever',
-    hoursTrained: 50,
-    profilePicture: 'https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZG9nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-    owner: {
-      _id: 'owner123',
-      fullName: 'John Doe',
-    },
+type PageView = 'training-logs' | 'animals' | 'all-training' | 'all-animals' | 'all-users';
+
+export default function TestPage() {
+  const [currentView, setCurrentView] = useState<PageView>('training-logs');
+  
+  const handleCancel = () => {
+    console.log('Cancelled');
+  };
+  
+  const handleSave = () => {
+    console.log('Saved');
   };
 
-  // Sample user data for testing
-  const sampleUser: publicUserData = {
-    _id: '123',
-    fullName: 'John Doe',
-    email: 'john.doe@example.com',
-    admin: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
+  const handleViewChange = (view: PageView) => {
+    setCurrentView(view);
+    console.log('View changed to:', view);
+  };
+
+  const handleCreateNew = () => {
+    // Handle create new action based on current view
+    if (currentView === 'all-animals') {
+      setCurrentView('animals');
+    } else if (currentView === 'all-training') {
+      setCurrentView('training-logs');
+    }
+    console.log('Create new clicked for view:', currentView);
+  };
+
+  // Get the appropriate title based on current view
+  const getHeaderTitle = () => {
+    switch (currentView) {
+      case 'animals': return 'Create Animal';
+      case 'training-logs': return 'Create Training Log';
+      case 'all-animals': return 'All Animals';
+      case 'all-training': return 'All Training Logs';
+      case 'all-users': return 'All Users';
+      default: return String(currentView).charAt(0).toUpperCase() + String(currentView).slice(1).replace('-', ' ');
+    }
+  };
+
+  // Determine if we should show the create button
+  const shouldShowCreateButton = ['training-logs', 'animals'].includes(currentView);
+
+  const renderView = () => {
+    switch (currentView) {
+      case 'all-animals':
+        return <AdminAnimalView />;
+      case 'all-training':
+        return <TrainingViewAdmin />;
+      case 'all-users':
+        return <UserViewAdmin />;
+      case 'animals':
+        return <CreateAnimal onCancel={handleCancel} onSave={handleSave} />;
+      case 'training-logs':
+        return <CreateTrainingLog onCancel={handleCancel} onSave={handleSave} />;
+      default:
+        return <div>Select a view from the sidebar</div>;
+    }
   };
 
   return (
-    <>
-      <div className="container mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">Animals</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          <AnimalCard animal={sampleAnimal} />
-        </div>
+    <div className="flex flex-col h-screen">
+      {/* Top Navbar */}
+      <Navbar />
+      
+      {/* Main Content - adjusted to account for fixed navbar */}
+      <div className="flex mt-[5.5rem]">
+        {/* Sidebar is already fixed in its component */}
+        <Sidebar currentView={currentView} onViewChange={handleViewChange} />
         
-        <h2 className="text-2xl font-bold mb-4">Users</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <UserCard user={sampleUser} />
+        {/* Main content area - positioned to the right of sidebar */}
+        <div className="ml-80 flex-1 flex flex-col">
+          {/* Fixed Header below navbar and to the right of sidebar */}
+          <div className="sticky top-[5.5rem] bg-white z-10 w-full">
+            <Header 
+              title={getHeaderTitle()} 
+              onCreateNew={shouldShowCreateButton ? handleCreateNew : undefined} 
+            />
+          </div>
+          
+          <div className="p-4 flex-1 overflow-auto">
+            {renderView()}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
