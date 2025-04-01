@@ -14,6 +14,9 @@ const heebo = Heebo({
 export const metadata: Metadata = {
   title: "Animal Training App",
   description: "BOG Final Project",
+  icons: {
+    icon: '/tab-logo.svg',
+  },
 };
 
 export default function RootLayout({
