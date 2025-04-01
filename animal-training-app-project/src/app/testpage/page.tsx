@@ -5,12 +5,13 @@ import CreateAnimal from '../../components/forms/CreateAnimal';
 import CreateTrainingLog from '../../components/forms/CreateTrainingLog';
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
+import AdminAnimalView from '../../components/views/AnimalViewAdmin';
 import { useState } from 'react';
 
 type PageView = 'training-logs' | 'animals' | 'all-training' | 'all-animals' | 'all-users';
 
 export default function TestPage() {
-  const [currentView, setCurrentView] = useState<PageView>('training-logs');
+  const [currentView, setCurrentView] = useState<PageView>('all-animals');
   
   const handleCancel = () => {
     console.log('Cancelled');
@@ -50,6 +51,19 @@ export default function TestPage() {
   // Determine if we should show the create button
   const shouldShowCreateButton = ['all-animals', 'all-training'].includes(currentView);
 
+  const renderView = () => {
+    switch (currentView) {
+      case 'all-animals':
+        return <AdminAnimalView />;
+      case 'animals':
+        return <CreateAnimal onCancel={handleCancel} onSave={handleSave} />;
+      case 'training-logs':
+        return <CreateTrainingLog onCancel={handleCancel} onSave={handleSave} />;
+      default:
+        return <div>Select a view from the sidebar</div>;
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen">
       {/* Top Navbar */}
@@ -71,18 +85,7 @@ export default function TestPage() {
           </div>
           
           <div className="p-4 flex-1 overflow-auto">
-            {currentView === 'animals' && (
-              <CreateAnimal onCancel={handleCancel} onSave={handleSave} />
-            )}
-            {currentView === 'training-logs' && (
-              <CreateTrainingLog onCancel={handleCancel} onSave={handleSave} />
-            )}
-            {currentView !== 'animals' && currentView !== 'training-logs' && (
-              <div className="p-8">
-                <h1 className="text-2xl font-bold">View: {currentView}</h1>
-                <p className="mt-4">Click on different sidebar options to change views</p>
-              </div>
-            )}
+            {renderView()}
           </div>
         </div>
       </div>
