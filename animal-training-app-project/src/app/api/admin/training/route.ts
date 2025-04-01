@@ -19,7 +19,7 @@ export async function GET( request: NextRequest) {
 
     await connectDB(); 
 
-    const isAdmin = await User.exists({ _id: userId, isAdmin: true}); 
+    const isAdmin = await User.exists({ _id: userId, admin: true}); 
 
     if (!isAdmin) {
       return NextResponse.json(
