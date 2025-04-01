@@ -29,7 +29,6 @@ export default function TestPage() {
   };
 
   const handleCreateNew = () => {
-    // Handle create new action based on current view
     if (currentView === 'all-animals') {
       setCurrentView('animals');
     } else if (currentView === 'all-training') {
@@ -38,7 +37,7 @@ export default function TestPage() {
     console.log('Create new clicked for view:', currentView);
   };
 
-  // Get the appropriate title based on current view
+
   const getHeaderTitle = () => {
     switch (currentView) {
       case 'animals': return 'Create Animal';
@@ -50,7 +49,7 @@ export default function TestPage() {
     }
   };
 
-  // Determine if we should show the create button
+
   const shouldShowCreateButton = ['training-logs', 'animals'].includes(currentView);
 
   const renderView = () => {
@@ -72,17 +71,10 @@ export default function TestPage() {
 
   return (
     <div className="flex flex-col h-screen">
-      {/* Top Navbar */}
       <Navbar />
-      
-      {/* Main Content - adjusted to account for fixed navbar */}
       <div className="flex mt-[5.5rem]">
-        {/* Sidebar is already fixed in its component */}
         <Sidebar currentView={currentView} onViewChange={handleViewChange} />
-        
-        {/* Main content area - positioned to the right of sidebar */}
         <div className="ml-80 flex-1 flex flex-col">
-          {/* Fixed Header below navbar and to the right of sidebar */}
           <div className="sticky top-[5.5rem] bg-white z-10 w-full">
             <Header 
               title={getHeaderTitle()} 
