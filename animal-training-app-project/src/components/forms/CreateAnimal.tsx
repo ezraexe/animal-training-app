@@ -1,7 +1,6 @@
 "use client";
 
 import { useUser } from "@/context/UserContext";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "../Header";
 interface Animal {
@@ -16,9 +15,10 @@ interface Animal {
 interface CreateAnimalProps {
   onCancel: () => void;
   onSave: () => void;
+  hideHeader?: boolean;
 }
 
-export default function CreateAnimal({ onCancel, onSave }: CreateAnimalProps) {
+export default function CreateAnimal({ onCancel, onSave, hideHeader = false }: CreateAnimalProps) {
   const { user } = useUser();
   const router = useRouter();
 
@@ -54,7 +54,7 @@ export default function CreateAnimal({ onCancel, onSave }: CreateAnimalProps) {
 
   return (
     <div>
-      <Header title="Animal" />
+      {!hideHeader && <Header title="Animal" />}
       <div className="p-10">
         <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
           <div>
@@ -153,7 +153,7 @@ export default function CreateAnimal({ onCancel, onSave }: CreateAnimalProps) {
               Cancel
             </button>
             <button 
-              type="submit"
+              type="submit" // this button calls handleSubmit method then makes post request to /api/nonadmin/animal
               className="flex w-1/6 p-2 bg-[#D21312] text-white rounded-md hover:bg-red-500 justify-center cursor-pointer"
             >
               Save
