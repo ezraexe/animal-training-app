@@ -7,7 +7,7 @@ import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import AdminAnimalView from '../../components/views/AnimalViewAdmin';
 import TrainingViewAdmin from '../../components/views/TrainingViewAdmin';
-import UserViewAdmin from '../../components/views/UserViewAdmin';
+// import UserViewAdmin from '../../components/views/UserViewAdmin'; need later 
 import { useState } from 'react';
 
 type PageView = 'training-logs' | 'animals' | 'all-training' | 'all-animals' | 'all-users';
@@ -58,8 +58,8 @@ export default function TestPage() {
         return <AdminAnimalView />;
       case 'all-training':
         return <TrainingViewAdmin />;
-      case 'all-users':
-        return <UserViewAdmin />;
+      // case 'all-users':
+      //   return <UserViewAdmin />;
       case 'animals':
         return <CreateAnimal onCancel={handleCancel} onSave={handleSave} />;
       case 'training-logs':
