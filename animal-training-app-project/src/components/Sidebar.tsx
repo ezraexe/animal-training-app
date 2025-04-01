@@ -35,8 +35,8 @@ export default function Sidebar({ currentView = 'training-logs', onViewChange = 
 
 
   return (
-    <div className="h-screen w-80 bg-white py-2 px-6 flex flex-col border-r-2 border-[#615E5E66] font-heebo fixed left-0 top-0 bottom-0"> 
-      <div className="space-y-4">
+    <div className="h-[calc(100vh-6.375rem)] w-80 bg-white py-2 px-6 flex flex-col border-r-2 border-[#615E5E66] font-heebo fixed left-0 top-[6.375rem] bottom-0 overflow-y-auto"> 
+      <div className="space-y-4 mb-20">
         {/*Training logs menu*/}
         <div 
           onClick={() => onViewChange('training-logs')}

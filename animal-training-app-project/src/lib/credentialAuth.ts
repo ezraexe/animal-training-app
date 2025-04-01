@@ -4,7 +4,6 @@ export const isValidEmail = (email: string): boolean => {
 };
 
 export const isValidPassword = (password: string): boolean => {
-  // Simplified validation - just check for minimum length
   return password.length >= 6;
 };
 
