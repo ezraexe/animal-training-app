@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
       select: 'fullName -_id'
     }); 
 
-    return NextResponse.json({success: true, data: populatedAnimal}, {status: 200}); 
+    return NextResponse.json({success: true, data: populatedAnimal}, {status: 200});
     
 
     
