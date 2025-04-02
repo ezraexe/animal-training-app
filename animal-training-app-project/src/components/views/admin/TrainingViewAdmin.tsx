@@ -3,7 +3,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useUser } from '@/context/UserContext';
-import LogCard from '../LogCard';
+import LogCard from '../../LogCard';
 
 interface Animal {
   _id: string;

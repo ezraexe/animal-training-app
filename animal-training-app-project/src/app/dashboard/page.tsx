@@ -5,8 +5,8 @@ import CreateAnimal from '../../components/forms/create/CreateAnimal';
 import CreateTrainingLog from '../../components/forms/create/CreateTrainingLog';
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
-import AdminAnimalView from '../../components/views/AnimalViewAdmin';
-import TrainingViewAdmin from '../../components/views/TrainingViewAdmin';
+import AdminAnimalView from '../../components/views/admin/AnimalViewAdmin';
+import TrainingViewAdmin from '../../components/views/admin/TrainingViewAdmin';
 // import UserViewAdmin from '../../components/views/UserViewAdmin'; need later 
 import { useState } from 'react';
 
