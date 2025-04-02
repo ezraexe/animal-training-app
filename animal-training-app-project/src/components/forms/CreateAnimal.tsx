@@ -52,7 +52,7 @@ export default function CreateAnimal({ onCancel, onSave }: CreateAnimalProps) {
 
       const result = await response.json();
       if (!result.success) throw new Error(result.error);
-
+      alert("Animal created successfully!");
       onSave(); // notifies parent component that animal was created
     } catch (error) {
       console.error("Error when creating animal:", error);

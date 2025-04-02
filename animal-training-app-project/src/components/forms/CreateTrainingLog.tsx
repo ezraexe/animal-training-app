@@ -82,7 +82,7 @@ export default function CreateTrainingLog({ onCancel, onSave }: CreateTrainingLo
 
       const result = await response.json();
       if (!result.success) throw new Error(result.error);
-
+      alert("Training log saved successfully!");
       onSave();
     } catch (error) {
       console.error('Error saving training log:', error);
