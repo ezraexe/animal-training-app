@@ -27,13 +27,24 @@ export default function CreateTrainingLog({ onCancel, onSave }: CreateTrainingLo
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        if (!user?._id) return; 
+        if (!user?._id) {
+          console.log('No user ID available yet');
+          return;
+        }
 
-        const response = await fetch(`/api/nonadmin/animal?owner=${user._id}`); 
+        console.log('Fetching animals for user:', user._id);
+        const response = await fetch(`/api/nonadmin/animal?owner=${user._id}`, {
+          headers: {
+            'user-id': user._id
+          }
+        }); 
         const data = await response.json(); 
+        console.log('Animal fetch response:', data);
 
         if (data.success) {
           setAnimals(data.data);
+        } else {
+          console.error('Failed to fetch animals:', data.error);
         }
       } catch (error) {
         console.error('Error fetching animals:', error);
