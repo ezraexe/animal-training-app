@@ -77,18 +77,19 @@ const TrainingViewAdmin: React.FC = () => {
   return (
     <div className="p-4">
       <div className="bg-white rounded-lg shadow p-6">
+        <h1 className="text-2xl font-bold mb-6">All Training Logs</h1>
         
-        {/* Empty state message */}
-        <div className="text-center py-10">
-          <p className="text-gray-500">No training logs available.</p>
-        </div>
-        
-        {/* You can add a button to create new logs if needed */}
-        {/* <div className="mt-4 text-center">
-          <button className="bg-primary text-white px-4 py-2 rounded-md">
-            Create New Training Log
-          </button>
-        </div> */}
+        {trainingLogs.length === 0 ? (
+          <div className="text-center py-10">
+            <p className="text-gray-500">No training logs available.</p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {trainingLogs.map((log) => (
+              <LogCard key={log._id} log={log} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

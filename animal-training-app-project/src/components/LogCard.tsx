@@ -5,14 +5,22 @@ import Image from "next/image";
 interface TrainingLog {
   _id: string;
   user: {
+    _id?: string;
     fullName: string;
   };
   animal: {
+    _id?: string;
     name: string;
     breed: string;
+    owner?: {
+      _id: string;
+      fullName: string;
+    };
+    hoursTrained?: number;
+    profilePicture?: string;
   };
   title: string;
-  date: Date;
+  date: string | Date;
   description: string;
   hours: number;
 }

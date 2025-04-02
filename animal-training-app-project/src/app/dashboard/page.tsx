@@ -1,8 +1,8 @@
 'use client';
 
 import Sidebar from '../../components/Sidebar';
-import CreateAnimal from '../../components/forms/CreateAnimal';
-import CreateTrainingLog from '../../components/forms/CreateTrainingLog';
+import CreateAnimal from '../../components/forms/create/CreateAnimal';
+import CreateTrainingLog from '../../components/forms/create/CreateTrainingLog';
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import AdminAnimalView from '../../components/views/AnimalViewAdmin';

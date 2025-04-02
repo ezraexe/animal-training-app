@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@/context/UserContext';
 import Header from '@/components/Header';
-import CreateTrainingLog from '@/components/forms/CreateTrainingLog';
-import EditTrainingLog from '@/components/forms/EditTrainingLog';
+import CreateTrainingLog from '@/components/forms/create/CreateTrainingLog';
+import EditTrainingLog from '@/components/forms/edit/EditTrainingLog';
 
 import { Heebo } from 'next/font/google';
 
