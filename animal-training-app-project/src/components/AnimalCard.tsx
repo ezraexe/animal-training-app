@@ -24,7 +24,7 @@ export default function AnimalCard({ animal }: { animal: AnimalWithId }) {
               {animal.name} - {animal.breed}
             </h3>
             <p className="text-gray-600 text-base">
-              {animal.owner._id} - Trained: {animal.hoursTrained} hours
+              {animal.owner.fullName} - Trained: {animal.hoursTrained} hours
             </p>
           </div>
         </div>
