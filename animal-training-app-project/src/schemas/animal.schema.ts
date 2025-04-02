@@ -35,6 +35,10 @@ const animalSchema = new mongoose.Schema({
   profilePicture: {
     type: String, 
     required: true,
+  },
+  birthDate: {
+    type: Date,
+    required: false,
   }
 });
 
@@ -50,4 +54,5 @@ export interface AnimalWithId {
   };
   hoursTrained: number;
   profilePicture: string;
+  birthDate?: Date; 
 }

@@ -25,12 +25,20 @@ export default function CreateAnimal({ onCancel, onSave }: CreateAnimalProps) {
     e.preventDefault();
     try {
       const formData = new FormData(e.target as HTMLFormElement);
+      
+
+      const month = Number(formData.get("month")) - 1; 
+      const date = Number(formData.get("date"));
+      const year = Number(formData.get("year"));
+      const birthDate = new Date(year, month, date).toISOString();
+      
       const data = {
         name: formData.get("name"),
         breed: formData.get("breed"),
         hoursTrained: Number(formData.get("hoursTrained")) || 0,
         owner: user?._id,
         profilePicture: "",
+        birthDate: birthDate, 
       };
 
       const response = await fetch("/api/nonadmin/animal", {

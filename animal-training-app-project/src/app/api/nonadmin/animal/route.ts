@@ -72,7 +72,8 @@ export async function POST(request: NextRequest) {
       breed: body.breed, 
       owner: userId, 
       hoursTrained: body.hoursTrained || 0, 
-      profilePicture: body.profilePicture || '', 
+      profilePicture: body.profilePicture || 'https://placehold.co/400x400?text=Animal',
+      birthDate: body.birthDate || null,
     })
 
     const populatedAnimal = await Animal.findById(animal._id)
