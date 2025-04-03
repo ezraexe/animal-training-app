@@ -33,16 +33,24 @@ export default function EditTrainingLog({ onCancel, onSave, trainingLog }: EditT
   const router = useRouter();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchAnimals = async () => {
     try {
       if (!user?._id) return;
-      const response = await fetch(`/api/nonadmin/animal?owner=${user._id}`);
+      setLoading(true);
+      const response = await fetch(`/api/nonadmin/animal`, {
+        headers: {
+          'user-id': user._id
+        }
+      });
       const result = await response.json();
       if (!result.success) throw new Error(result.error);
       setAnimals(result.data);
     } catch (error) {
       console.error('Error fetching animals:', error);
+    } finally {
+      setLoading(false);
     }
   };
   
@@ -121,6 +129,10 @@ export default function EditTrainingLog({ onCancel, onSave, trainingLog }: EditT
     ? trainingLog.animal._id 
     : trainingLog.animal;
 
+  if (loading) {
+    return <div className="flex justify-center items-center h-full">Loading animals...</div>;
+  }
+
   return (
     <div>
       <div className="p-10">
@@ -144,11 +156,15 @@ export default function EditTrainingLog({ onCancel, onSave, trainingLog }: EditT
               defaultValue={animalId}
               required
             >
-              {animals.map((animal) => (
-                <option key={animal._id} value={animal._id}>
-                  {animal.name} - {animal.breed}
-                </option>
-              ))}
+              {animals.length > 0 ? (
+                animals.map((animal) => (
+                  <option key={animal._id} value={animal._id}>
+                    {animal.name} - {animal.breed}
+                  </option>
+                ))
+              ) : (
+                <option value="">No animals available</option>
+              )}
             </select>
           </div>
 
