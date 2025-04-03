@@ -4,7 +4,7 @@ import { useUser } from '@/context/UserContext'
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation' 
 
-type PageView = 'training-logs' | 'animals' | 'all-training' | 'all-animals' | 'all-users';
+type PageView = 'training-logs' | 'create-training-log' | 'animals' | 'all-training' | 'all-animals' | 'all-users';
 
 interface SidebarProps {
   currentView?: PageView; 

@@ -88,7 +88,6 @@ export default function TestPage() {
       <Navbar />
       <div className="flex mt-[5.5rem]">
         <Sidebar 
-          // @ts-ignore - Ignore type error for now
           currentView={currentView} 
           onViewChange={handleViewChange} 
         />
