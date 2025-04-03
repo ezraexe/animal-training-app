@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { useUser } from '@/context/UserContext';
-import Header from '@/components/Header';
 import CreateTrainingLog from '@/components/forms/create/CreateTrainingLog';
 import EditTrainingLog from '@/components/forms/edit/EditTrainingLog';
+import LogCard from '@/components/LogCard';
 
 import { Heebo } from 'next/font/google';
 
@@ -23,8 +23,21 @@ interface Animal {
 
 interface TrainingLog {
   _id: string;
-  user: string;
-  animal: Animal;
+  user: {
+    _id?: string;
+    fullName: string;
+  };
+  animal: {
+    _id?: string;
+    name: string;
+    breed: string;
+    owner?: {
+      _id: string;
+      fullName: string;
+    };
+    hoursTrained?: number;
+    profilePicture?: string;
+  };
   title: string;
   date: Date;
   description: string;
@@ -45,7 +58,7 @@ export default function TrainingLogView() {
   const fetchLogs = async () => {
     try {
       if (!user?._id) return;
-      const response = await fetch('/api/training', {
+      const response = await fetch('/api/nonadmin/training', {
         headers: {
           'user-id': user._id
         }
@@ -61,7 +74,7 @@ export default function TrainingLogView() {
   };
 
   if (loading) {
-    return <div></div>;
+    return <div className="flex justify-center items-center h-full">Loading training logs...</div>;
   }
 
   if (isCreating) {
@@ -79,7 +92,7 @@ export default function TrainingLogView() {
   if (editingLog) {
     return (
       <EditTrainingLog 
-        trainingLog={editingLog}
+        trainingLog={editingLog as any}
         onCancel={() => setEditingLog(null)}
         onSave={() => {
           setEditingLog(null);
@@ -91,74 +104,22 @@ export default function TrainingLogView() {
 
   return (
     <div className="flex flex-col h-full">
-      <Header 
-        title="Training logs" 
-        onCreateNew={() => setIsCreating(true)}
-      />
       <div className="flex-1 min-h-0">
-      <div className="h-full overflow-auto px-8">
-      <div className="flex flex-col items-center w-full space-y-6 py-8">
-        {logs.map((log) => (
-          <div 
-            key={log._id} 
-            className="flex max-w-6xl w-11/12 h-36 bg-white rounded-2xl overflow-hidden border-gray-50"
-            style={{ boxShadow: '0 0 15px rgba(0, 0, 0, 0.2)' }}
-          >
-            <div className="bg-secondary p-4 w-36 text-white flex flex-col justify-center items-center rounded-l-2xl">
-              <span className="font-['Oswald'] text-5xl font-bold">{new Date(log.date).getDate()}</span>
-              <span className="text-xl font-['Oswald'] font-thin mt-4">
-                {new Date(log.date).toLocaleDateString('en-US', {
-                month: 'short'
-                })} - {new Date(log.date).toLocaleDateString('en-US', {
-                year: 'numeric'
-                })}
-              </span>
-            </div>
-            <div className="flex items-center gap-4">
-              {log.animal ? (
-                <>
-                  <div className={`${heebo.className} bg-white h-full pl-6 py-3`}>
-                    <h3 className={`flex items-center`}>
-                      <span className="font-semibold text-2xl">{log.title}</span> 
-                      <span className="text-base font-semibold text-gray-400 pl-1">• {log.hours} hours</span></h3>
-                    <p className="tracking-wider text-lg text-gray-400 font-semibold mt-1">{log.animal.breed} - {log.animal.name}</p>
-                    <p className="mt-4">{log.description}</p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className={`${heebo.className} bg-white h-full pl-6 py-3`}>
-                    <h3 className={`flex items-center`}>
-                      <span className="font-semibold text-2xl">{log.title}</span> 
-                      <span className="text-base font-semibold text-gray-400 pl-1">• {log.hours} hours</span></h3>
-                    <p className="tracking-wider text-lg text-gray-400 font-semibold mt-1">No Animal found</p>
-                    <p className="mt-4">{log.description}</p>
-                  </div>
-                </>
-              )}
-            </div>
-            <div className="flex flex-grow justify-end items-center">
-              <button 
-                onClick={() => setEditingLog(log)}
-                className="mr-6 w-20 h-20 rounded-full bg-primary-component flex justify-center items-center hover:bg-red-500 transition-colors duration-200"
-              >
-                <img 
-                  src="/pencil.svg"
-                  alt="Edit"
-                  className="w-8 h-8"
-                />
-              </button>
-            </div>
+        <div className="h-full overflow-auto px-8">
+          <div className="flex flex-col items-center w-full space-y-6 py-8">
+            {logs.length === 0 ? (
+              <div className="text-center py-10">
+                <p className="text-gray-500">No training logs available.</p>
+              </div>
+            ) : (
+              logs.map((log) => (
+                <div key={log._id} onClick={() => setEditingLog(log)}>
+                  <LogCard log={log} />
+                </div>
+              ))
+            )}
           </div>
-        ))}
-        
-        {logs.length === 0 && (
-          <div className="text-center text-gray-500 py-8">
-            No training logs found
-          </div>
-        )}
-      </div>
-      </div>
+        </div>
       </div>
     </div>
   );
