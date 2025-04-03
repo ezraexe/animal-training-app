@@ -9,6 +9,7 @@ import AdminAnimalView from '../../components/views/admin/AnimalViewAdmin';
 import TrainingViewAdmin from '../../components/views/admin/TrainingViewAdmin';
 import TrainingView from '../../components/views/user/TrainingView';
 import AnimalView from '../../components/views/user/AnimalView';
+import UserViewAdmin from '../../components/views/admin/UserViewAdmin';
 // import UserViewAdmin from '../../components/views/UserViewAdmin'; need later 
 import { useState } from 'react';
 
@@ -74,8 +75,8 @@ export default function TestPage() {
         return <AdminAnimalView />;
       case 'all-training':
         return <TrainingViewAdmin />;
-      // case 'all-users':
-      //   return <UserViewAdmin />;
+      case 'all-users':
+        return <UserViewAdmin />;
       case 'create-animal':
         return <CreateAnimal onCancel={handleCancel} onSave={handleSave} />;
       case 'create-training-log':
