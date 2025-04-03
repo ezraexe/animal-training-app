@@ -69,7 +69,6 @@ const TrainingViewAdmin: React.FC = () => {
   }, [user]);
 
   const handleEditLog = (log: TrainingLog) => {
-    // Format the log to match what EditTrainingLog expects
     const formattedLog = {
       ...log,
       user: log.user._id || '',
