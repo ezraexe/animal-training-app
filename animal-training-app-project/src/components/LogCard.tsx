@@ -32,7 +32,7 @@ export default function LogCard({ log }: { log: TrainingLog }) {
   const year = date.getFullYear();
 
   return (
-    <div className="w-[1165px] h-[162px] top-[836px] left-[-2715px] bg-white rounded-lg overflow-hidden flex">
+    <div className="w-[1165px] h-[162px] top-[836px] left-[-2715px] bg-white overflow-hidden flex">
       {/* Date section */}
       <div className="w-[139px] h-[162px] bg-[rgba(7,10,82,0.85)] text-white flex flex-col items-center justify-center rounded-tl-[20px] rounded-bl-[20px]">
         <div className="font-['Oswald'] font-medium text-[48px] leading-[100%]">
@@ -44,7 +44,7 @@ export default function LogCard({ log }: { log: TrainingLog }) {
       </div>
 
       {/* Content section */}
-      <div className="flex flex-1">
+      <div className="flex flex-1 border-t border-r border-b border-black rounded-tr-lg rounded-br-lg">
         <div className="flex-1 pl-[20px]">
           <div className="flex items-center h-[44px] mt-[7px]">
             <div className="font-['Heebo'] font-bold text-[30px] leading-[100%] mr-[5px]">

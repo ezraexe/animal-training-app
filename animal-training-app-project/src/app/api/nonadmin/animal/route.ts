@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       breed: body.breed, 
       owner: userId, 
       hoursTrained: body.hoursTrained || 0, 
-      profilePicture: body.profilePicture || 'https://placehold.co/400x400?text=Animal',
+      profilePicture: body.profilePicture || "/cookeddog.jpg",
       birthDate: body.birthDate || null,
     })
 

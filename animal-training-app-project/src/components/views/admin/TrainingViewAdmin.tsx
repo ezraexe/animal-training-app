@@ -77,7 +77,7 @@ const TrainingViewAdmin: React.FC = () => {
   return (
     <div className="p-4">
       <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-2xl font-bold mb-6">All Training Logs</h1>
+        {/* <h1 className="text-2xl font-bold mb-6">All Training Logs</h1> */}
         
         {trainingLogs.length === 0 ? (
           <div className="text-center py-10">
