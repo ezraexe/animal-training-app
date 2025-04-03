@@ -30,7 +30,6 @@ export const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 // this version is explicit and wont update if the schema changes
 // going to use different implementation for now
-
 // export type publicUserData = {
 //   fullName: string;
 //   email: string;

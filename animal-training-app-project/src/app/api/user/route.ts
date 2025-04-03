@@ -31,7 +31,7 @@ const validateUserData = (data: Partial<UserData>) => {
     return NextResponse.json(
       {
         error:
-          "Password is invalid. Must contain 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number",
+          "Password is invalid. Must contain at least 6 characters",
       },
       { status: 400 }
     );

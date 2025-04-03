@@ -6,7 +6,6 @@ export async function GET() {
   try {
     await connectDB();
     
-    // Try to create a test user to verify write access
     const testUser = await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
@@ -14,7 +13,6 @@ export async function GET() {
       admin: false
     });
 
-    // Delete the test user immediately
     await User.findByIdAndDelete(testUser._id);
 
     return NextResponse.json({ 
