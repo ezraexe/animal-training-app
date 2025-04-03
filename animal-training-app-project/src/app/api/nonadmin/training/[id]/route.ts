@@ -76,3 +76,46 @@ export async function PATCH(request: NextRequest, {params}: {params: {id: string
     ); 
   }
 }
+
+export async function DELETE(request: NextRequest, {params}: {params: {id: string}}) {
+  try {
+    const userId = request.headers.get('user-id'); 
+
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: 'User ID is required'}, 
+        { status: 400}
+      ); 
+    }
+
+    const id = params.id; 
+
+    await connectDB(); 
+
+    const existingLog = await TrainingLog.findOne({ 
+      _id: id, 
+      user: userId, 
+    });
+
+    if (!existingLog) {
+      return NextResponse.json(
+        { success: false, error: 'Training log not found'}, 
+        { status: 404}
+      ); 
+    }
+
+    await TrainingLog.findByIdAndDelete(id);
+
+    return NextResponse.json({
+      success: true, 
+      message: 'Training log deleted successfully', 
+    }, { status: 200}); 
+    
+  } catch (error) {
+    console.error('Error deleting training log:', error); 
+    return NextResponse.json(
+      { success: false, error: 'Failed to delete training log'}, 
+      { status: 500}
+    ); 
+  }
+}

@@ -73,6 +73,19 @@ export default function TrainingLogView() {
     }
   };
 
+  const handleEditLog = (log: TrainingLog) => {
+    // Format the log to match what EditTrainingLog expects
+    const formattedLog = {
+      ...log,
+      user: user?._id || '',
+      animal: {
+        ...log.animal,
+        _id: log.animal._id || ''
+      }
+    };
+    setEditingLog(formattedLog as any);
+  };
+
   if (loading) {
     return <div className="flex justify-center items-center h-full">Loading training logs...</div>;
   }
@@ -113,7 +126,7 @@ export default function TrainingLogView() {
               </div>
             ) : (
               logs.map((log) => (
-                <div key={log._id} onClick={() => setEditingLog(log)}>
+                <div key={log._id} className="w-full cursor-pointer" onClick={() => handleEditLog(log)}>
                   <LogCard log={log} />
                 </div>
               ))

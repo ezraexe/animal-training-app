@@ -16,6 +16,7 @@ export default function AdminAnimalView() {
   const fetchAnimals = async () => {
     try {
       if (!user?._id) return;
+      
       const response = await fetch('/api/admin/animal', {
         headers: {
           'Content-Type': 'application/json',

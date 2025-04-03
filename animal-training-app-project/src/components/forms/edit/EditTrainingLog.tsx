@@ -14,8 +14,8 @@ interface Animal {
 
 interface TrainingLog {
   _id: string;
-  user: string;
-  animal: Animal;
+  user: string | { _id?: string; fullName: string };
+  animal: Animal | { _id?: string; name: string; breed: string };
   title: string;
   date: Date;
   description: string;
@@ -32,6 +32,7 @@ export default function EditTrainingLog({ onCancel, onSave, trainingLog }: EditT
   const { user } = useUser();
   const router = useRouter();
   const [animals, setAnimals] = useState<Animal[]>([]);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchAnimals = async () => {
     try {
@@ -85,10 +86,40 @@ export default function EditTrainingLog({ onCancel, onSave, trainingLog }: EditT
     }
   };
 
+  const handleDelete = async () => {
+    if (!confirm('Are you sure you want to delete this training log?')) {
+      return;
+    }
+    
+    setIsDeleting(true);
+    try {
+      const response = await fetch(`/api/nonadmin/training/${trainingLog._id}`, {
+        method: 'DELETE',
+        headers: {
+          'user-id': user?._id || ''
+        }
+      });
+      
+      const result = await response.json();
+      if (!result.success) throw new Error(result.error);
+      
+      onSave(); 
+    } catch (error) {
+      console.error('Error deleting training log:', error);
+      alert('Failed to delete training log');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   const logDate = new Date(trainingLog.date);
   const year = logDate.getFullYear();
   const month = logDate.getMonth() + 1;
   const date = logDate.getDate();
+
+  const animalId = typeof trainingLog.animal === 'object' && trainingLog.animal !== null 
+    ? trainingLog.animal._id 
+    : trainingLog.animal;
 
   return (
     <div>
@@ -110,7 +141,7 @@ export default function EditTrainingLog({ onCancel, onSave, trainingLog }: EditT
             <select 
               name="animalId"
               className="w-full p-2 border border-[#C0BFBF] rounded-lg bg-white" 
-              defaultValue={trainingLog.animal._id}
+              defaultValue={animalId}
               required
             >
               {animals.map((animal) => (
@@ -195,13 +226,21 @@ export default function EditTrainingLog({ onCancel, onSave, trainingLog }: EditT
             <button 
               type="button"
               onClick={onCancel}
-              className="flex w-1/6 p-2 border border-[#D21312] rounded-md hover:bg-red-50 justify-center cursor-pointer"
+              className="flex-1 p-2 border border-[#D21312] rounded-md hover:bg-red-50 justify-center cursor-pointer"
             >
               Cancel
             </button>
             <button 
+              type="button"
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="flex-1 p-2 border border-[#D21312] bg-white text-black rounded-md hover:bg-red-50 justify-center cursor-pointer"
+            >
+              {isDeleting ? 'Deleting...' : 'Delete'}
+            </button>
+            <button 
               type="submit"
-              className="flex w-1/6 p-2 bg-[#D21312] text-white rounded-md hover:bg-red-500 justify-center cursor-pointer"
+              className="flex-1 p-2 bg-[#D21312] text-white rounded-md hover:bg-red-500 justify-center cursor-pointer"
             >
               Save
             </button>
