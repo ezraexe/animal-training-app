@@ -4,11 +4,11 @@ import { useUser } from '@/context/UserContext'
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation' 
 
-type PageView = 'training-logs' | 'create-training-log' | 'animals' | 'all-training' | 'all-animals' | 'all-users';
+type PageView = 'training-logs' | 'create-training-log' | 'animals' | 'create-animal' | 'all-training' | 'all-animals' | 'all-users';
 
 interface SidebarProps {
-  currentView?: PageView; 
-  onViewChange?: (view: PageView) => void
+  currentView: PageView;
+  onViewChange: (view: PageView) => void;
 }
 
 export default function Sidebar({ currentView = 'training-logs', onViewChange = () => {} } : SidebarProps) {
@@ -31,8 +31,6 @@ export default function Sidebar({ currentView = 'training-logs', onViewChange = 
       console.error('Logout failed:', error);
     }
   }
-
-
 
   return (
     <div className="h-[calc(100vh-6.375rem)] w-80 bg-white py-2 px-6 flex flex-col border-r-2 border-[#615E5E66] font-heebo fixed left-0 top-[6.375rem] bottom-0 overflow-y-auto"> 
@@ -133,5 +131,5 @@ export default function Sidebar({ currentView = 'training-logs', onViewChange = 
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -8,10 +8,11 @@ import Header from '../../components/Header';
 import AdminAnimalView from '../../components/views/admin/AnimalViewAdmin';
 import TrainingViewAdmin from '../../components/views/admin/TrainingViewAdmin';
 import TrainingView from '../../components/views/user/TrainingView';
+import AnimalView from '../../components/views/user/AnimalView';
 // import UserViewAdmin from '../../components/views/UserViewAdmin'; need later 
 import { useState } from 'react';
 
-type PageView = 'training-logs' | 'create-training-log' | 'animals' | 'all-training' | 'all-animals' | 'all-users';
+type PageView = 'training-logs' | 'create-training-log' | 'animals' | 'create-animal' | 'all-training' | 'all-animals' | 'all-users';
 
 export default function TestPage() {
   const [currentView, setCurrentView] = useState<PageView>('training-logs');
@@ -19,8 +20,8 @@ export default function TestPage() {
   const handleCancel = () => {
     if (currentView === 'create-training-log') {
       setCurrentView('training-logs');
-    } else if (currentView === 'animals') {
-      setCurrentView('all-animals');
+    } else if (currentView === 'create-animal') {
+      setCurrentView('animals');
     }
     console.log('Cancelled');
   };
@@ -28,8 +29,8 @@ export default function TestPage() {
   const handleSave = () => {
     if (currentView === 'create-training-log') {
       setCurrentView('training-logs');
-    } else if (currentView === 'animals') {
-      setCurrentView('all-animals');
+    } else if (currentView === 'create-animal') {
+      setCurrentView('animals');
     }
     console.log('Saved');
   };
@@ -41,7 +42,9 @@ export default function TestPage() {
 
   const handleCreateNew = () => {
     if (currentView === 'all-animals') {
-      setCurrentView('animals');
+      setCurrentView('create-animal');
+    } else if (currentView === 'animals') {
+      setCurrentView('create-animal');
     } else if (currentView === 'all-training') {
       setCurrentView('create-training-log');
     } else if (currentView === 'training-logs') {
@@ -52,9 +55,10 @@ export default function TestPage() {
 
   const getHeaderTitle = () => {
     switch (currentView) {
-      case 'animals': return 'Create Animal';
+      case 'create-animal': return 'Create Animal';
       case 'create-training-log': return 'Create Training Log';
       case 'training-logs': return 'Training Logs';
+      case 'animals': return 'My Animals';
       case 'all-animals': return 'All Animals';
       case 'all-training': return 'All Training Logs';
       case 'all-users': return 'All Users';
@@ -62,7 +66,7 @@ export default function TestPage() {
     }
   };
 
-  const shouldShowCreateButton = ['training-logs', 'all-animals', 'all-training'].includes(currentView);
+  const shouldShowCreateButton = ['training-logs', 'animals', 'all-animals', 'all-training'].includes(currentView);
 
   const renderView = () => {
     switch (currentView) {
@@ -72,12 +76,14 @@ export default function TestPage() {
         return <TrainingViewAdmin />;
       // case 'all-users':
       //   return <UserViewAdmin />;
-      case 'animals':
+      case 'create-animal':
         return <CreateAnimal onCancel={handleCancel} onSave={handleSave} />;
       case 'create-training-log':
         return <CreateTrainingLog onCancel={handleCancel} onSave={handleSave} />;
       case 'training-logs':
         return <TrainingView />;
+      case 'animals':
+        return <AnimalView />;
       default:
         return <div>Select a view from the sidebar</div>;
     }
